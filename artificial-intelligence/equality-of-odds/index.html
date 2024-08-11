@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="icon" type="image/png" href="assets/mlu_robot.png" />
+    <link rel="stylesheet" href="assets/styles/normalize.css" />
+    <link rel="stylesheet" href="assets/styles/font.css" />
+    <link rel="stylesheet" href="assets/styles/katex.css" />
+    <link rel="stylesheet" href="assets/styles/global.css" />
+    <link rel="stylesheet" href="assets/styles/bundle.css" />
+  
+    <!-- meta tags -->
+    <title>Equality of Odds</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   
+  </head>
+
+  <body>
+    <div id="intro-icon" class="svelte-1sra5xj" style="--ai-color: black;"><a href="https://mlu-explain.github.io" class="svelte-1sra5xj"><svg width="30" height="30" viewBox="0 0 234 216"><g id="mlu_robot 1" clip-path="url(#clip0)"><g><path id="Vector" d="M90.6641 83.1836C96.8828 83.1836 101.941 78.1289 101.941 71.8906V71.8242C101.941 65.5898 96.8945 60.5312 90.6641 60.5312C84.4453 60.5312 79.3828 65.5898 79.3828 71.8242V71.8906C79.3828 78.1289 84.4336 83.1836 90.6641 83.1836Z" fill="black"></path><path id="Vector_2" d="M143.305 83.1836C149.523 83.1836 154.586 78.1289 154.586 71.8906V71.8242C154.586 65.5898 149.535 60.5312 143.305 60.5312C137.09 60.5312 132.027 65.5898 132.027 71.8242V71.8906C132.027 78.1289 137.078 83.1836 143.305 83.1836Z" fill="black"></path><path id="Vector_3" d="M163.586 159.402H173.609V122.641H163.586V159.402Z" fill="black"></path><path id="Vector_4" d="M60.3594 159.402H70.3867V122.641H60.3594V159.402Z" fill="black"></path><g id="Group"><path id="Vector_5" d="M182.16 30.0781H51.8047V10.0234H182.16V30.0781ZM182.16 103.609H51.8047V40.1055H182.16V103.609ZM144.559 168.789H89.4062V113.641H144.559V168.789ZM0 0V10.0234H15.8789V46.7891H25.9023V10.0234H41.7812V113.641H79.3867V178.816H96.9297V215.578H106.957V178.816H127.016V215.578H137.039V178.816H154.586V113.641H192.188V10.0234H233.969V0" fill="black"></path></g></g></g><defs><clipPath id="clip0"><rect width="233.97" height="215.58" fill="black"></rect></clipPath></defs></svg> <h2 class="logo svelte-1sra5xj">MLU-EXPL<span id="ai" class="svelte-1sra5xj">AI</span>N</h2></a></div>
+    <section id="intro" class="svelte-1x84v15">
+      <h1 id="intro-hed" class="svelte-1x84v15">Equality Of Odds</h1>
+      <h1 id="intro-sub" class="svelte-1x84v15">A Visual Introduction to Measuring and Mitigating Bias in Machine Learning</h1>
+      <h3 id="intro__date" class="svelte-1x84v15"><a href="https://www.linkedin.com/in/miacarinamayer">Mia Mayer</a> &amp; <a href="https://twitter.com/jdwlbr">Jared Wilber</a>, April 2023</h3>
+  </section>
+  
+  <section>
+      <p class="body-text">
+          Machine Learning models learn to make predictions by looking at data with the help of algorithms, both of which can potentially be biased against different groups of people. Unwanted bias in machine learning can inadvertently harm,
+          and negatively stereotype against underrepresented or (historically and otherwise) disfavored groups. Therefore, it is crucial to
+          <span class="highlight">evaluate and control data and model predictions not only for general machine learning performance but also for bias</span>.
+      </p>
+  </section>
+  <section>
+    <p class="body-header">Defining Equalized Odds</p>
+    <p class="body-text">In this article, we will review a well-known fairness criterion, called
+      'Equalized Odds' (EO). EO aims to equalize the
+      error a model makes when predicting categorical outcomes for different
+      groups, here:
+      <svg height="16" width="16"><circle cx="8" cy="10" r="4" stroke="var(--group_circles)" stroke-width="3" fill="var(--group_circles)"></circle></svg>
+      and
+      <svg height="12" width="12"><polygon points="6,0 0,12 12,12" style="fill: var(--group_triangles); stroke-width: 1;"></polygon>
+        Sorry, your browser does not support inline SVG.
+      </svg>.
+      <br><br>EO takes the merit different groups of people have into account
+      by considering the underlying ground truth distribution of the labels. This
+      ensures the errors across outcomes and groups are similar, i.e. fair.
+      <br> <br>
+  
+      For example, if we consider a hiring scenario, the errors EO compares are
+      'wrong rejection' and 'wrong acceptance'. We could simply count the number
+      of wrong rejections and acceptances but as groups generally differ in size,
+      we should use
+      <span class="highlight">error rates</span> instead as those are scale
+      invariant. Useful error rates to consider are the False Negative Rate (FNR)<sup><span class="info-tooltip" title="Probability of an individual with a true positive outcome to receive a negative outcome.">[ℹ]</span></sup>
+      and False Positive Rate (FPR)<sup><span class="info-tooltip" title="Probability of falsely assigning a positive outcome.">[ℹ]</span></sup>
+      of a classifier, or the combination of both those error rates<sup><span class="info-tooltip" title="In the EO literature, usually TPR and FPR are considered. This is possible because TPR can be calculated as 1 - FNR.">[ℹ]
+      </span></sup>.
+      <br><br>
+      According to EO, a
+      <span class="highlight">model is fair if the predictions it makes have the same TPR<sup><span class="info-tooltip" title="TPR = 1 - FNR">[ℹ]</span></sup> and FPR across all groups </span>in the dataset. Formally, this can be written as:
+      <br> <br></p>
+      <p class="body-text">where  denotes predictions (here: positive),  refers to the group membership and  represents the ground
+        truth.
+        <br><br> Equalized odds aims to match TPR and FPR for different groups, punishing models that perform well for one group only.
+        Unfortunately this can be very hard to achieve in practice, so it makes
+        sense to relax the EO criterion and consider a modified version of the EO
+        equation with  for equalizing TPR
+        <span class="highlight">(equal opportunity)</span>, or  for equalizing FPR.</p>
+  </section>
+  
+  <section>
+    <p class="body-header">Equalized Odds to measure fairness</p>
+    <p class="body-text">Using the EO equation, we can derive different metrics to measure the
+      fairness of a model. For example, we can look at:</p><br>
+      <div id="tab-container" class="svelte-hpngh">
+        <ul class="svelte-hpngh">
+            <li class="svelte-hpngh active"><span class="svelte-hpngh">FPR</span></li>
+            <li class="svelte-hpngh"><span class="svelte-hpngh">FNR</span></li>
+        </ul>
+        <div class="box svelte-hpngh active">
+            <p class="body-text"><span class="definition-header svelte-100zm90">False Positive Error Rate (FPR) Balance</span></p>
+            <br />
+            <p class="body-text">
+                To calculate FPR balance, we work out FPR
+                <sup>
+                    <span
+                        class="info-tooltip"
+                        title="Percentage of false positives compared to all positive
+            predictions."
+                    >
+                        [ℹ]
+                    </span>
+                </sup>
+                per group and take the difference:
+                <br />
+                <br />
+            </p>
+    
+            <p class="body-text">The resulting value will be in the range [-1, 1], the closer to 0, the more predictive equality the model achieves and we satisfy the EO equation where .</p>
+        </div>
+        <div class="box svelte-hpngh">
+          <p class="body-text"><span class="definition-header svelte-100zm90">False Negative Error Rate (FNR) Balance</span></p>
+          <br />
+          <p class="body-text">
+              To calculate FNR balance, we work out FNR <sup><span class="info-tooltip" title="Probability that a true positive will be miss-classified as negative.">[ℹ]</span></sup> per group and take the difference. It is also possible to
+              rewrite this using TPR<sup><span class="info-tooltip" title="TPR = 1 - FNR">[ℹ] </span></sup>: <br />
+              <br />
+          </p>
+      
+          <p class="body-text">The resulting value will be in the range [-1, 1], the closer to 0 the closer to equal opportunity the groups for EO equation where .</p>
+      </div>
+      
+        
+    </div>
+    <p class="body-text">The metrics above show how fair/unfair the model is by measuring either FPR
+      or FNR; but according to EO, we need <span class="highlight">both values to be the same</span>
+      (known as <i>Conditional Procedure Accuracy Equality</i>) while
+      <span class="highlight">also achieving a certain predictive performance</span>
+      with the model.
+      <br> 
+      <br>
+      Have a look at the beeswarm plot below. It shows how the predictions of a model
+      change when the probability threshold (the slider) is moved.
+      <br> 
+      <br>
+      Try to find a probability threshold that results in 0 FPR and FNR difference
+      at the same time; is it even possible? Also observe what the
+      <a href="https://mlu-explain.github.io/precision-recall/">model performance</a>
+      (here: group-wise accuracy) is doing as you move the slider.
+      <br> 
+      <br>
+    </p>
+    
+   <p style="text-align: center;"> <img src="assets/img/equelai_gif.JPG" alt="" style="margin: 0 auto;"></p>
+   
+   <p class="body-text">Note that as you drag the slider, you might find some so-called <span class="highlight">lazy solutions where everyone gets rejected or accepted</span>. These are solutions where the FPR or FNR difference is indeed 0. However,
+    while these solutions technically meet the relaxed version of EO, they make
+    little sense from a general ML performance perspective (check out the
+    accuracy values of the model).
+    <br><br>
+    You can also verify that there is no probability threshold where FPR and FPR
+    are the same for both groups by comparing the values in the chart below:</p>
+    <br><br>
+    <p style="text-align: center;"> <img src="assets/img/layer2.JPG" alt="" style="margin: 0 auto;"></p>
+  </section>
+  <section>
+    <p class="body-header">Equalized Odds to achieve fairness</p>
+    <p class="body-text">Using EO, we can also influence the predictions a model makes to achieve a
+      more fair outcome. We are going to look at two different ways of performing
+      this: by constraining the model during training and by introducing
+      group-wise probability thresholds for a trained model.</p><br><br>
+      <div id="tab-container2" class="svelte-hpngh">
+        <ul class="svelte-hpngh">
+            <li class="svelte-hpngh active"><span class="svelte-hpngh">Training</span></li>
+            <li class="svelte-hpngh"><span class="svelte-hpngh">Post-Processing</span></li>
+        </ul>
+        <div class="box svelte-hpngh active">
+            <p class="body-text"><span class="definition-header svelte-100zm90">False Positive Error Rate (FPR) Balance</span></p>
+            <br />
+            <p class="body-text">
+                To calculate FPR balance, we work out FPR
+                <sup>
+                    <span
+                        class="info-tooltip"
+                        title="Percentage of false positives compared to all positive
+            predictions."
+                    >
+                        [ℹ]
+                    </span>
+                </sup>
+                per group and take the difference:
+                <br />
+                <br />
+            </p>
+    
+            <p class="body-text">The resulting value will be in the range [-1, 1], the closer to 0, the more predictive equality the model achieves and we satisfy the EO equation where .</p>
+        </div>
+        <div class="box svelte-hpngh">
+          <p class="body-text"><span class="definition-header svelte-100zm90">False Negative Error Rate (FNR) Balance</span></p>
+          <br />
+          <p class="body-text">
+              To calculate FNR balance, we work out FNR <sup><span class="info-tooltip" title="Probability that a true positive will be miss-classified as negative.">[ℹ]</span></sup> per group and take the difference. It is also possible to
+              rewrite this using TPR<sup><span class="info-tooltip" title="TPR = 1 - FNR">[ℹ] </span></sup>: <br />
+              <br />
+          </p>
+      
+          <p class="body-text">The resulting value will be in the range [-1, 1], the closer to 0 the closer to equal opportunity the groups for EO equation where .</p>
+      </div>
+    </div><br><br>
+
+    <p class="body-text">To visualize the search for the probability thresholds that meets EO, we can
+      look at the so-called <a href="https://mlu-explain.github.io/roc-auc/">ROC curves</a>
+      for both groups,<svg height="16" width="16"><circle cx="8" cy="10" r="4" stroke="var(--group_circles)" stroke-width="3" fill="var(--group_circles)"></circle></svg>
+      and
+      <svg height="12" width="12"><polygon points="6,0 0,12 12,12" style="fill:var(--group_triangles);stroke-width:1"></polygon>
+        Sorry, your browser does not support inline SVG.
+      </svg>. We can see that for most probability thresholds the TPR and FPR
+      values are different per group. For the dataset shown below, there is only
+      one point where TPR and FPR are equal for both groups (and not lazy solutions); this is where the EO
+      criterion is satisfied.</p><br>
+
+      <section><p class="body-header">The End</p> 
+        <p class="body-text">While machine learning algorithms have the potential to revolutionize
+          decision-making, we have to ensure that a fairness criteria is used for
+          measuring any potential bias in addition to general Machine Learning
+          metrics. Depending on the outcome of the bias evaluation we should include
+          bias mitigation. Equality of Odds (EO) offers a promising approach to
+          mitigate bias and is a method that can be used in different ways (and even
+          during post-processing with access only to the predictions). However, before
+          using EO for evaluation or bias mitigation, we should carefully consider the
+          context and potential trade-offs between competing objectives.</p></section>
+  </section><br><br><br>
+  <section id="resources" class="svelte-bk7479"><br> 
+    <h3 class="body-header svelte-bk7479">References + Open Source</h3> 
+    <p class="body-text svelte-bk7479">This article is a product of the following resources + the awesome people
+      who made (and contributed to) them:</p> 
+    <br> 
+  
+    <p class="resource-item svelte-bk7479"><a class="on-end svelte-bk7479" href="https://fairmlbook.org/">[1] Fairness and Machine Learning
+        </a><br>
+      (Solon Barocas, Moritz Hardt, Arvind Narayanan).</p> 
+    <p class="resource-item svelte-bk7479"><a class="on-end svelte-bk7479" href="https://arxiv.org/abs/1610.08452">[2] Fairness Beyond Disparate Treatment &amp; Disparate Impact: Learning Classification without Disparate Mistreatment
+        </a><br>
+      (Muhammad Bilal Zafar, Isabel Valera, Manuel Gomez Rodriguez, Krishna P. Gummadi, 2016).</p> 
+    <p class="resource-item svelte-bk7479"><a class="on-end svelte-bk7479" href="https://arxiv.org/abs/1610.02413">[3] Equality of Opportunity in Supervised Learning
+        </a><br>
+      (Moritz Hardt, Eric Price, Nathan Srebro, 2016).</p> 
+    <p class="resource-item svelte-bk7479"><a class="on-end svelte-bk7479" href="https://d3js.org/">D3.js</a><br>(Mike Bostock &amp;
+      Philippe Rivière)</p> 
+  
+    <p class="resource-item svelte-bk7479"><a class="on-end svelte-bk7479" href="https://katex.org/">KaTeX</a>  <br>(Emily Eisenberg
+      &amp; Sophie Alpert)</p> 
+    <p class="resource-item svelte-bk7479"><a class="on-end svelte-bk7479" href="https://svelte.dev/">Svelte</a><br>(Rich Harris)</p> 
+    <br> 
+    <br> 
+    <br></section>
+
+   
+  <script
+  src="https://code.jquery.com/jquery-3.7.1.min.js"
+  integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+  crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function(){
+      $('#tab-container ul li').click(function(){
+          // Remove 'active' class from all tabs and content
+          $('#tab-container ul li').removeClass('active');
+          $('#tab-container .box').removeClass('active');
+
+          // Add 'active' class to the clicked tab
+          $(this).addClass('active');
+
+          // Get the index of the clicked tab
+          var index = $(this).index();
+
+          // Show the corresponding content by index
+          $('#tab-container .box').eq(index).addClass('active');
+      });
+  });
+  $(document).ready(function(){
+      $('#tab-container2 ul li').click(function(){
+          // Remove 'active' class from all tabs and content
+          $('#tab-container2 ul li').removeClass('active');
+          $('#tab-container2 .box').removeClass('active');
+
+          // Add 'active' class to the clicked tab
+          $(this).addClass('active');
+
+          // Get the index of the clicked tab
+          var index = $(this).index();
+
+          // Show the corresponding content by index
+          $('#tab-container2 .box').eq(index).addClass('active');
+      });
+  });
+  </script>
+  </body>
+</html>

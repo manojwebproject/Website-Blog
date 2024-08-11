@@ -1,0 +1,22 @@
+<svg width="624" height="283" class="svelte-jw0d68"><path d="
+                    M 156 176.875
+                    L 312 141.5
+                  " class="nn-edge svelte-jw0d68" id="nn-edge-1-1-0.5-0"></path><g><text class="moving-text-forward svelte-jw0d68" opacity="1" alignment-baseline="middle">⬤
+                  <animateMotion id="animatePathForward1" begin="1s" dur="1s" repeatCount="indefinite" path="
+                      M 156 176.875
+                      L 312 141.5
+                    " class="svelte-jw0d68"></animateMotion></text></g><path d="
+                    M 156 106.125
+                    L 312 141.5
+                  " class="nn-edge svelte-jw0d68" id="nn-edge-1-1-1.5-0"></path><g><text class="moving-text-forward svelte-jw0d68" opacity="1" alignment-baseline="middle">⬤
+                  <animateMotion id="animatePathForward1" begin="1s" dur="1s" repeatCount="indefinite" path="
+                      M 156 106.125
+                      L 312 141.5
+                    " class="svelte-jw0d68"></animateMotion></text></g><path d="
+                    M 312 141.5
+                    L 468 141.5
+                  " class="nn-edge svelte-jw0d68" id="nn-edge-2-1-1-0"></path><g><text class="moving-text-forward svelte-jw0d68" opacity="1" alignment-baseline="middle">⬤
+                  <animateMotion id="animatePathForward2" begin="2s" dur="1s" repeatCount="indefinite" path="
+                      M 312 141.5
+                      L 468 141.5
+                    " class="svelte-jw0d68"></animateMotion></text></g><g class="nn-g svelte-jw0d68" transform="translate(120 158.875)"><rect class="nn-node input svelte-jw0d68" width="72" height="36"></rect><text class="nn-text svelte-jw0d68" text-anchor="middle" alignment-baseline="middle" dx="36" dy="18">input<tspan class="subscript svelte-jw0d68" dy="4">2</tspan> </text></g><g class="nn-g svelte-jw0d68" transform="translate(120 88.125)"><rect class="nn-node input svelte-jw0d68" width="72" height="36"></rect><text class="nn-text svelte-jw0d68" text-anchor="middle" alignment-baseline="middle" dx="36" dy="18">input<tspan class="subscript svelte-jw0d68" dy="4">1</tspan> </text></g><g class="nn-g svelte-jw0d68" transform="translate(276 123.5)"><rect class="nn-node hidden svelte-jw0d68" width="72" height="36"></rect><text class="nn-text svelte-jw0d68" text-anchor="middle" alignment-baseline="middle" dx="36" dy="18">function</text></g><g class="nn-g svelte-jw0d68" transform="translate(432 123.5)"></g><g class="nn-g svelte-jw0d68" transform="translate(432 141.5)"><clipPath id="clip"><rect width="72" height="36"></rect></clipPath> <rect class="nn-node svelte-njsf0d" stroke-width="2.5" fill="#ffe135" width="72" height="36" y="-18"></rect> <text class="nn-text svelte-njsf0d" text-anchor="middle" alignment-baseline="middle" dx="36" y="0">output</text> </g><rect fill="#e5f7ff" x="0" y="0" width="15" height="15"></rect><text class="nn-text-bottom svelte-jw0d68" x="2" y="273">*For simplicity, bias terms are not shown.</text></svg>

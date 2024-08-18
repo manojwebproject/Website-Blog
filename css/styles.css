@@ -184,7 +184,7 @@ body {
   text-align: center;
   align-items: center;
   padding-bottom: 1rem;
-  min-height: 70vh;
+  /*min-height: 70vh;*/
   padding-left: 5%;
 }
 
@@ -197,7 +197,7 @@ body {
   max-width: 70%;
   margin: auto;
   align-items: center;
-  max-height: 100vh;
+  /*max-height: 100vh;*/
 }
 
 #intro-container p {
@@ -421,6 +421,15 @@ button.content-button > a {
   transition: all 0.5s ease;
 }
 
+.imagefull{
+  width:100%;
+}
+
+.full-container {
+  max-width: 100% !important;
+}
+
+
 .three_box .card a:hover {
   background: #232f3e;
 }
@@ -579,5 +588,6 @@ button.content-button > a {
   }
   .three_box {
     grid-template-columns: repeat(1, 1fr);
+
 }
 }
